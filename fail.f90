@@ -24,12 +24,12 @@ integer(int64), intent(in) :: n
 
 print *, " my size is ", n
 allocate(A(n), B(n))
-do concurrent (i=1:n)
+do concurrent (i=1_int64:n)
 A(i) = 1.0_dp
 B(i) = 0.0_dp
 end do
 alpha = 3.0_dp
-do concurrent (i=1:n)
+do concurrent (i=1_int64:n)
   B(i) = alpha * A(i) + B(i)
 end do 
 call check_array(B, 3.0_dp, tol, n)
@@ -45,7 +45,7 @@ use, intrinsic :: iso_fortran_env, only: int64
   integer(int64), intent(in) :: n 
   integer(int64) :: i
 
-  do i = 1, n
+  do i = 1_int64, n
     if (abs(array(i) - expected) > tol) then
       print *, "ERROR: array(", i, ") = ", array(i), " but expected ~", expected
       stop 1
