@@ -14,12 +14,12 @@ integer(int64), intent(in) :: n
 
 print *, " my size is ", n
 allocate(A(n), B(n))
-do concurrent (i=1:n)
+do concurrent (i=1_int64:n)
 A(i) = 1.0_dp
 B(i) = 0.0_dp
 end do
 alpha = 3.0_dp
-do concurrent (i=1:n)
+do concurrent (i=1_int64:n)
   B(i) = alpha * A(i) + B(i)
 end do
 call check_array(B, 3.0_dp, tol, n)
